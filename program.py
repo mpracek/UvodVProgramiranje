@@ -1,3 +1,11 @@
+import urllib .request
+
+podatki = urllib.request.urlopen('http://www.flashscores.co.uk/')
+print(podatki)
+
+
+
+
 "Python 3.6.0 (v3.6.0:41df79263a11, Dec 23 2016, 07:18:10) [MSC v.1900 32 bit (Intel)] on win32"
 def verjetnost(ekipa, rezultati, kraj):
     '''Pove nam približno verjetnost, s katero bo prišlo do zmage, remija oziroma poraza glede na prejšnje rezultate ekipe.
@@ -24,20 +32,19 @@ def verjetnost(ekipa, rezultati, kraj):
         return ekipa, verjetnost1, 'zmaga'
      
         
-def seznam_stav(verjetnost, izhodna_datoteka):
+def seznam_stav(izhodna_datoteka, ekipa, rezultati, kraj):
     '''V verjetnost vpišemo, kar nam vrne funkcija verjetnost, izhodna datoteka pa je datoteka, v katero bomo slikali'''
     with open (izhodna_datoteka, 'a') as dat:
-        print(verjetnost, file = dat)
+        print(verjetnost(ekipa, rezultati, kraj), file = dat)
 
-def slovar_stav(vhodna_datoteka):
+def slovar_stav(vhodna_datoteka, izhodna_datoteka):
     '''Vrne slovar stav'''
     SlovarStav = {}
     with open (vhodna_datoteka) as dat2:
-        for vrstica in dat2:
-            split(',') = stava
-            for ključ in vrstica:
-                SlovarStav[stava[1]] = [stava[0], stava[2]]
-    return SlovarStav
+        with open (izhodna_datoteka, 'a') as dat3:
+            for vrstica in dat2:
+                SlovarStav[vrstica[1]] = SlovarStav[vrstica[0][2]]
+        print(SlovarStav, file = 'dat3')
                 
         
 def uredi_po_vrednostih(slovar):
