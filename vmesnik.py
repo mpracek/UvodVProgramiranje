@@ -34,7 +34,7 @@ gumb6 = tk.Button(okno, text = 'Dodaj',
                                                    pr.kraj('nova2.txt')))
 gumb6.grid(row = 1, column = 3)
 
-gumb7 = tk.Button(okno, text = 'Nova dogodek',
+gumb7 = tk.Button(okno, text = 'Nov dogodek',
                   command = lambda: pr.nov_izbris('nova1.txt',
                                                   'nova2.txt'))
 gumb7.grid(row = 1, column = 4)
