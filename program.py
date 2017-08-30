@@ -58,7 +58,7 @@ def skupna_stava(vhodna_datoteka):
                 return verjetnost_celote
             else:
                 razdelitev = vrstica.split(',')
-                verjetnost_celote = verjetnost_celote * float(razdelitev[0])
+                verjetnost_celote = verjetnost_celote * float(razdelitev[1])
         return verjetnost_celote
 
 def celota(vhodna_datoteka):
