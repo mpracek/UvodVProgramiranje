@@ -2,12 +2,12 @@
 import os
 
 
-def verjetnost(ekipa, rezultati, kraj):
+def verjetnost(ekipa, rezultati, kraji):
     '''Pove nam približno verjetnost, s katero bo prišlo do zmage, remija oziroma poraza glede na prejšnje rezultate ekipe.
     V rezultat vpišemo niz Z, P, R, kjer je Z zmaga, P poraz in R remi.
     V kraj vpišemo niz domač ali gost.'''
-    if len(rezultati) != 5:
-        return None
+    if len(rezultati) < 5:
+        print("Vnesel si premalo rezultatov. Vnesi še ",5-len(rezultati)," rezultate")
     else: 
         verjetnost1 = 0
         for rezultat in rezultati:
@@ -19,11 +19,12 @@ def verjetnost(ekipa, rezultati, kraj):
                 verjetnost1 += 0.05
             else:
                 verjetnost1 = verjetnost1
-        for _ in kraj:
+        for kraj in kraji:
             if kraj == 'domač':
-                verjetnost1 * 1
+                verjetnost1 *= 1
             elif kraj == 'gost':
-                verjetnost1 * 0.75
+                verjetnost1 *= 0.75
+        print(verjetnost1)
         if verjetnost1 < 0.5:
             return ekipa, verjetnost1, 'poraz ali remi'
         else:
@@ -57,63 +58,56 @@ def skupna_stava(vhodna_datoteka):
                 return verjetnost_celote
             else:
                 razdelitev = vrstica.split(',')
-                verjetnost_celote = verjetnost_celote * float(razdelitev[1])
+                verjetnost_celote = verjetnost_celote * float(razdelitev[0])
         return verjetnost_celote
 
 def celota(vhodna_datoteka):
     with open(vhodna_datoteka, 'a') as vhod:
-       print(skupna_stava(vhodna_datoteka), file = vhod)
+        print(skupna_stava(vhodna_datoteka), file = vhod)
 
 def izbris(vhodna_datoteka1, vhodna_datoteka2, vhodna_datoteka3 ):
     os.remove(vhodna_datoteka1)
     os.remove(vhodna_datoteka2)
     os.remove(vhodna_datoteka3)
 
+def nov_izbris(vhodna_datoteka1, vhodna_datoteka2 ):
+    os.remove(vhodna_datoteka1)
+    os.remove(vhodna_datoteka2)
+
+
 def poraz(datoteka):
     with open(datoteka, 'a') as dat:
         print('P', file = dat)
+    print("Zapisan: P")
 
 def remi(datoteka):
     with open(datoteka, 'a') as dat:
         print('R', file = dat)
+    print("Zapisan: R")
 
 def zmaga(datoteka):
     with open(datoteka, 'a') as dat:
         print('Z', file = dat)
+    print("Zapisan: Z")
 
 def domač(datoteka):
     with open(datoteka, 'a') as dat:
         print('domač', file = dat)
+    print("Zapisan: domač")
 
 def gost(datoteka):
     with open(datoteka, 'a') as dat:
         print('gost', file = dat)
+    print("Zapisan: gost")
 
 def vrnjeni_rezultati(datoteka):
     with open(datoteka) as dat:
         besedilo = ''
         for vrstica in dat:
-            besedilo = besedilo + str(vrstica)
-        beseda = ''
-        for znak in besedilo:
-            if znak in 'ZPR':
-                beseda = beseda + znak
-            else:
-                beseda = beseda
-        return beseda
+            besedilo = besedilo + vrstica[:-1]
+        print(besedilo)
+        return besedilo
            
 def kraj(datoteka):
     with open(datoteka) as dat:
-        for vrstica in dat:
-            if str(vrstica) == 'gost':
-                return 'gost'
-            elif str(vrstica) == 'domač':
-                return 'domač'
-            else:
-                return False
-
-
-    
-          
-            
-        
+        return dat.read()
